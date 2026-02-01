@@ -68,3 +68,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Deploy to Vercel
+
+- **Connect repo:** Link your GitHub (or Git provider) repository in the Vercel dashboard and import the project.
+- **Build settings:** Vercel auto-detects Create React App. Use the build command `npm run build` and output directory `build` (the included `vercel.json` sets this).
+- **Environment variable:** Add `REACT_APP_GOOGLE_MAPS_API_KEY` in Vercel's Environment Variables (set it to your Google Maps API key). The app references this variable from `public/index.html`.
+- **One-click deploy:** After import, click Deploy — Vercel will run the build and publish the site.
+- **CLI deploy (optional):** Install the Vercel CLI and run:
+
+```bash
+npm i -g vercel
+vercel login
+vercel --prod
+```
+
+If you prefer to keep the API key secret in Vercel, create a Vercel Secret and reference it in the Environment Variables as `@your-secret-name`.
+
+If you want, I can also create a GitHub Actions workflow to automatically run tests and notify you before Vercel deploys. Want that added?

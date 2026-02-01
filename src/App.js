@@ -4,8 +4,20 @@ import { User, Hospital, LogOut, MapPin, Phone, Shield, Menu, X, Ambulance, Chev
 
 export default function LifeSyncApp() {
   // 1. STATE MANAGEMENT (Persistence Simulation)
-  const [userRole, setUserRole] = useState(localStorage.getItem('role') || null);
-  const [isUserRegistered, setIsUserRegistered] = useState(localStorage.getItem('isRegistered') === 'true');
+  const [userRole, setUserRole] = useState(() => {
+    try {
+      return localStorage.getItem('role') || null;
+    } catch {
+      return null;
+    }
+  });
+  const [isUserRegistered, setIsUserRegistered] = useState(() => {
+    try {
+      return localStorage.getItem('isRegistered') === 'true';
+    } catch {
+      return false;
+    }
+  });
   const [currentPage, setCurrentPage] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [sosStarted, setSosStarted] = useState(false);
@@ -13,8 +25,12 @@ export default function LifeSyncApp() {
   const [watchId, setWatchId] = useState(null);
   const [notificationStatus, setNotificationStatus] = useState({});
   const [userData, setUserData] = useState(() => {
-    const stored = localStorage.getItem('userData');
-    return stored ? JSON.parse(stored) : null;
+    try {
+      const stored = localStorage.getItem('userData');
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
   });
 
   // 2. LOGIN HANDLER
